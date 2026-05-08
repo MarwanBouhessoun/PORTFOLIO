@@ -1,8 +1,8 @@
 /*
-** PORTOFOLIO, 2026
+** PORTFOLIO, 2026
 ** server
 ** File description:
-** server for portofolio
+** server for portfolio
 */
 
 const express = require('express');
