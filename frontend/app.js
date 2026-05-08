@@ -6,23 +6,73 @@
 */
 
 const conteneurProjets = document.getElementById('liste-projets');
+let projetsData = [];
 
 fetch('/api/projets')
     .then(reponse => reponse.json())
     .then(mesProjets => {
+        projetsData = mesProjets;
         conteneurProjets.innerHTML = '';
         mesProjets.forEach(projet => {
-            const HTMLduProjet = `
-            <div class="carte-projet">
+            const carte = document.createElement('div');
+            carte.className = 'carte-projet';
+            carte.innerHTML = `
                 <img src="${projet.image}" alt="Image du ${projet.titre}">
                 <div class="contenu-carte">
                     <h3>${projet.titre}</h3>
                     <p>${projet.description}</p>
-                </div>
-            </div>`;
-            conteneurProjets.innerHTML += HTMLduProjet;
+                </div>`;
+            carte.addEventListener('click', () => openModal(projet));
+            conteneurProjets.appendChild(carte);
         });
-    })
+
+        const plusEncore = document.createElement('div');
+        plusEncore.className = 'carte-projet carte-plus';
+        plusEncore.innerHTML = `
+            <div class="contenu-carte contenu-plus">
+                <h3>Et plus encore...</h3>
+                <p>D'autres projets à découvrir</p>
+            </div>`;
+        conteneurProjets.appendChild(plusEncore);
+    });
+
+function openModal(projet) {
+    document.getElementById('modal-image').src = projet.image;
+    document.getElementById('modal-titre').textContent = projet.titre;
+    document.getElementById('modal-meta').textContent = `Durée: ${projet.duree || 'Non spécifiée'}`;
+    document.getElementById('modal-detail').textContent = projet.detail || projet.description;
+
+    const technosContainer = document.getElementById('modal-technos');
+    technosContainer.innerHTML = '';
+    if (projet.technologies) {
+        projet.technologies.forEach(techno => {
+            const tag = document.createElement('span');
+            tag.className = 'techno-tag';
+            tag.textContent = techno;
+            technosContainer.appendChild(tag);
+        });
+    }
+
+    document.getElementById('modal-projet').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('modal-projet').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+document.getElementById('modal-projet').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('modal-projet')) {
+        closeModal();
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeModal();
+    }
+});
 
 // Gestion du formulaire de contact - appel direct à Formspree
 document.querySelector('.contact-form').addEventListener('submit', async function(e) {

@@ -58,6 +58,7 @@ Mais n'étant jamais vraiment passé de l'autre côté, le jour où j'ai tapé m
                         <li>Makefile</li>
                         <li>Unix</li>
                         <li>HTML / CSS</li>
+                        <li>JavaScript</li>
                     </ul>
                     <a href="/images/CV_Marwan_Bouhessoun.pdf" class="btn" download>Télécharger mon CV</a>
                 </div>
@@ -98,6 +99,20 @@ Mais n'étant jamais vraiment passé de l'autre côté, le jour où j'ai tapé m
             </div>
         </section>
     </main>
+
+    <div class="modal-overlay" id="modal-projet">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <img class="modal-image" id="modal-image" src="" alt="">
+            <div class="modal-body">
+                <h2 id="modal-titre"></h2>
+                <div class="modal-meta" id="modal-meta"></div>
+                <p id="modal-detail"></p>
+                <div class="modal-technos" id="modal-technos"></div>
+            </div>
+        </div>
+    </div>
+
     <script src="/app.js"></script>
 </body>
 </html>
