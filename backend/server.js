@@ -7,6 +7,7 @@
 
 const express = require('express');
 const path = require('path');
+require('dotenv').config();
 const app = express();
 const PORT = 3000;
 
@@ -20,9 +21,12 @@ app.get('/', (req, res) =>
 });
 
 const mesProjets = [
-    { id: 1, titre: "Projet 1", description: "le 1", image: "https://picsum.photos/id/10/400/250"},
-    { id: 2, titre: "Projet 2", description: "le 2", image: "https://picsum.photos/id/10/400/250"},
-    { id: 3, titre: "Projet 3", description: "le 3", image: "https://picsum.photos/id/10/400/250"}
+    { id: 1, titre: "Cyber Sécurité", description: "Pentesting - Analyse de vulnérabilités et tests d'intrusion", image: "https://picsum.photos/id/180/400/250"},
+    { id: 2, titre: "Projet I.R.I.S", description: "PoC - Logiciel embarqué pour la recherche d'identité RA", image: "https://picsum.photos/id/201/400/250"},
+    { id: 3, titre: "Data Analyse Train", description: "Analyse de trajets de train avec Jupyter Notebook - 3 semaines", image: "https://picsum.photos/id/219/400/250"},
+    { id: 4, titre: "Refonte de Shell", description: "Développement d'un shell personnalisé en C", image: "https://picsum.photos/id/241/400/250"},
+    { id: 5, titre: "Programmation Mathématique", description: "Matrices, vecteurs et calculs mathématiques avancés", image: "https://picsum.photos/id/284/400/250"},
+    { id: 6, titre: "Gestion de collision et de radar", description: "CSFML - 3 semaines", image: "https://picsum.photos/id/326/400/250"}
 ]
 
 app.get('/api/projets', (req, res) =>
